@@ -63,5 +63,5 @@ unsigned get_genre_likes(const Genre *genre) {
     if (genre != NULL)
         return genre->likes;
 
-    return NULL;
+    return 0;
 }

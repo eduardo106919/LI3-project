@@ -28,8 +28,8 @@ void *create_user(const char **tokens, unsigned len) {
     new_user->email = strdup(tokens[1]);
     new_user->first_name = strdup(tokens[2]);
     new_user->last_name = strdup(tokens[3]);
-    new_user->age = date_to_age(tokens[4]);
-    new_user->liked_musics = parse_string_list(tokens[7], new_user->num_liked, ID_LEN, ", ");
+    // new_user->age = date_to_age(tokens[4]);
+    new_user->liked_musics = parse_string_list(tokens[7], &(new_user->num_liked), ID_LEN, ", ");
 
     return new_user;
 }
@@ -143,11 +143,18 @@ short unsigned get_user_age(const User *user) {
     return 0;
 }
 
-const char **get_user_liked_musics(const User *user) {
-    if (user == NULL)
+char **get_user_liked_musics(const User *user) {
+    if (user == NULL || user->liked_musics == NULL || user->num_liked == 0)
         return NULL;
 
-    return user->liked_musics;
+    char **result = (char **)calloc(user->num_liked, sizeof(char *));
+    if (result == NULL)
+        return NULL;
+
+    for (unsigned i = 0; i < user->num_liked; i++)
+        result[i] = strdup(user->liked_musics[i]);
+
+    return result;
 }
 
 unsigned get_user_num_liked(const User *user) {

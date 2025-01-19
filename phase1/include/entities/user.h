@@ -105,7 +105,7 @@ const char *get_user_last_name(const User *user);
  * @param user User
  * @return short unsigned* User age
  */
-short unsigned *get_user_age(const User *user);
+short unsigned get_user_age(const User *user);
 
 /**
  * @brief Get the user liked musics
@@ -113,7 +113,7 @@ short unsigned *get_user_age(const User *user);
  * @param user User
  * @return const char** User liked musics
  */
-const char **get_user_liked_musics(const User *user);
+char **get_user_liked_musics(const User *user);
 
 /**
  * @brief Get the number of liked musics by the user
@@ -121,7 +121,7 @@ const char **get_user_liked_musics(const User *user);
  * @param user User
  * @return unsigned* Number of liked musics
  */
-unsigned *get_user_num_liked(const User *user);
+unsigned get_user_num_liked(const User *user);
 
 
 

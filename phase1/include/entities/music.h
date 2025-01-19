@@ -78,7 +78,7 @@ unsigned get_music_duration(const Music *music);
  * @param music Music
  * @return const char** Music Authors (NULL on failure)
  */
-const char **get_music_authors(const Music *music);
+char **get_music_authors(const Music *music);
 
 /**
  * @brief Get the number of authors of the music

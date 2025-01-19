@@ -104,11 +104,18 @@ unsigned get_music_duration(const Music *music) {
     return 0;
 }
 
-const char **get_music_authors(const Music *music) {
-    if (music != NULL)
-        return music->authors;
+char **get_music_authors(const Music *music) {
+    if (music == NULL || music->authors == NULL || music->num_authors == 0)
+        return NULL;
 
-    return NULL;
+    char **result = (char **)calloc(music->num_authors, sizeof(char *));
+    if (result == NULL)
+        return NULL;
+
+    for (unsigned i = 0; i < music->num_authors; i++)
+        result[i] = strdup(music->authors[i]);
+
+    return result;
 }
 
 unsigned get_music_num_authors(const Music *music) {

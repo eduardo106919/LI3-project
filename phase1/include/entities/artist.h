@@ -63,7 +63,7 @@ void set_artist_country(Artist *artist, const char *country);
  * @param artist Artist
  * @param value New recipe per stream
  */
-void set_artist_recipe_stream(Artist *artist, unsigned double value);
+void set_artist_recipe_stream(Artist *artist, double value);
 
 /**
  * @brief Change the artist total recipe
@@ -71,7 +71,7 @@ void set_artist_recipe_stream(Artist *artist, unsigned double value);
  * @param artist Artist
  * @param value New total recipe
  */
-void set_artist_total_recipe(Artist *artist, unsigned double value);
+void set_artist_total_recipe(Artist *artist, double value);
 
 /**
  * @brief Change the artist discography
@@ -113,7 +113,7 @@ const char *get_artist_country(const Artist *artist);
  * @param artist Artist
  * @return unsigned double Artist recipe stream (0 on error)
  */
-unsigned double get_artist_recipe_stream(const Artist *artist);
+double get_artist_recipe_stream(const Artist *artist);
 
 /**
  * @brief Get the artist total recipe
@@ -121,7 +121,7 @@ unsigned double get_artist_recipe_stream(const Artist *artist);
  * @param artist Artist
  * @return unsigned double Artist total recipe (0 on error)
  */
-unsigned double get_artist_total_recipe(const Artist *artist);
+double get_artist_total_recipe(const Artist *artist);
 
 /**
  * @brief Get the artist discography
@@ -137,7 +137,7 @@ unsigned get_artist_discography(const Artist *artist);
  * @param artist Artist
  * @return const char** Artists constituents ids (NULL on error)
  */
-const char **get_artists_constituent(const Artist *artist);
+char **get_artists_constituent(const Artist *artist);
 
 /**
  * @brief Get the number of constituents artists

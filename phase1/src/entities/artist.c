@@ -9,8 +9,8 @@
 typedef struct artist {
     char *id;
     char *name;
-    unsigned double recipe_per_stream;
-    unsigned double total_recipe;
+    double recipe_per_stream;
+    double total_recipe;
     unsigned discography;
     char **id_constituent;
     // == 0 -> individual, != 0 -> group
@@ -91,12 +91,12 @@ void set_artist_country(Artist *artist, const char *country) {
     }
 }
 
-void set_artist_recipe_stream(Artist *artist, unsigned double value) {
+void set_artist_recipe_stream(Artist *artist, double value) {
     if (artist != NULL)
         artist->recipe_per_stream = value;
 }
 
-void set_artist_total_recipe(Artist *artist, unsigned double value) {
+void set_artist_total_recipe(Artist *artist, double value) {
     if (artist != NULL)
         artist->total_recipe = value;
 }
@@ -129,14 +129,14 @@ const char *get_artist_country(const Artist *artist) {
     return NULL;
 }
 
-unsigned double get_artist_recipe_stream(const Artist *artist) {
+double get_artist_recipe_stream(const Artist *artist) {
     if (artist != NULL)
         return artist->recipe_per_stream;
 
     return 0;
 }
 
-unsigned double get_artist_total_recipe(const Artist *artist) {
+double get_artist_total_recipe(const Artist *artist) {
     if (artist != NULL)
         return artist->total_recipe;
 
@@ -150,11 +150,18 @@ unsigned get_artist_discography(const Artist *artist) {
     return 0;
 }
 
-const char **get_artists_constituent(const Artist *artist) {
+char **get_artists_constituent(const Artist *artist) {
     if (artist == NULL || artist->id_constituent == NULL)
         return NULL;
     
-    return artist->id_constituent;
+    char **result = (char **)calloc(artist->num_artists, sizeof(char *));
+    if (result == NULL)
+        return NULL;
+
+    for (unsigned i = 0; i < artist->num_artists; i++)
+        result[i] = strdup(artist->id_constituent[i]);
+
+    return result;
 }
 
 unsigned get_artist_num_const(const Artist *artist) {
