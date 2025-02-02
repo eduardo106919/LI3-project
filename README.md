@@ -2,7 +2,7 @@
 
 This repository contains the implementation for the **LI3 project** of the year 2024/2025.
 
-This project is meant to be "replicate" a **music streaming system**, capable of analysing data and respond to certain queries.
+This project is meant to "replicate" a **music streaming system**, capable of analysing data and respond to certain queries.
 
 ## Build and Execute
 
@@ -13,15 +13,15 @@ To execute the program, you will have 3 options:
 - test program (programa-testes)
 - interative program (programa-interativo) [on **phase 2 only**]
 
-:warning: To run these executable you must have the csv files and the files with the commands, go to [datasets](/datasets/) and download the necessary items.
+:warning: To run these executables you must have the csv files and the files with the commands, go to [datasets](/datasets/) and download the necessary items.
 
 **Main** program:
-```bash
+```
 ./bin/programa-principal <dataset-folder> <inputs-file>
 ```
 
 **Test** program:
-```bash
+```
 ./bin/programa-testes <dataset-folder> <inputs-file> <correct-results-folder>
 ```
 
