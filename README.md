@@ -6,14 +6,14 @@ This project is meant to "replicate" a **music streaming system**, capable of an
 
 ## Build and Execute
 
-To build to the executable, run `make`:
+To build the executable, run `make`.
 
-To execute the program, you will have 3 options:
+To execute the program you have 3 options:
 - main program (programa-principal)
 - test program (programa-testes)
 - interative program (programa-interativo) [on **phase 2 only**]
 
-:warning: To run these executables you must have the csv files and the files with the commands, go to [datasets](/datasets/) and download the necessary items.
+:warning: To run these executables you must have the csv files and the files with the commands, go to [datasets](https://github.com/eduardo106919/LI3-project/releases/tag/v1.0.0) and download the necessary items. Or go to the **releases** page and find the most recent version.
 
 **Main** program:
 ```
@@ -26,7 +26,7 @@ To execute the program, you will have 3 options:
 ```
 
 **Interative** program:
-```bash
+```
 ./bin/programa-interativo
 ```
 
