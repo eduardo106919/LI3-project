@@ -1,56 +1,68 @@
-#include "managers/catalog.h"
+#include "parsers/parser.h"
 #include "utils/utils_str.h"
+#include "utils/utils_files.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-static int parse_entity_line(Catalog *manager, const char *line,
-                             bool (*check_entity)(Catalog *, char **, unsigned),
-                             unsigned num_tokens, Entity ent) {
+/**
+ * @brief 
+ * 
+ * Assumes the input is not NULL
+ * 
+ * @param manager 
+ * @param type 
+ * @param line 
+ * @param n_tokens 
+ * @return true 
+ * @return false 
+ */
+static bool parse_entity_line(Catalog *manager, Entity type, const char *line, unsigned n_tokens) {
     char *temp = strdup(line);
-    char *tokens[num_tokens];
+    char *tokens[n_tokens];
+    char *delim = ";";
 
     // tokenize the line
-    for (unsigned i = 0; i < num_tokens; i++) {
-        tokens[i] = strsep(&temp, ";");
+    for (unsigned i = 0; i < n_tokens; i++) {
+        tokens[i] = strsep(&temp, delim);
 
-        remove_first_last_char(tokens[i]);        
+        // remove the quotation marks
+        remove_first_last_char(tokens[i]);
     }
 
-    // entity is valid
-    if (check_entity(manager, tokens, num_tokens) == true)
-        catalog_add_entity(tokens, num_tokens, ent);
+    // validate the entity
+    if (catalog_validate_entity(manager, tokens, n_tokens, type) == true)
+        catalog_add_entity(manager, tokens, n_tokens, type);
     else
-        return 1;
-    
-    free(*tokens);
-    return 0;
+        return false;
+
+    return true;
 }
 
-int parse_entity(Catalog *manager, const char *file_name, unsigned num_tokens,
-                 bool (*check_entity)(Catalog *, char **, unsigned),
-                 void *(*create_entity)(const char **, unsigned), Entity ent) {
+int parse_entity(Catalog *manager, const char *file_name, Entity type, unsigned n_tokens) {
+    if (manager == NULL || file_name == NULL)
+        return 1;
+
     FILE *input_file = fopen(file_name, "r");
     if (input_file == NULL) {
         perror("Error");
-        return 1;
+        return 2;
     }
 
-    size_t len = strlen(file_name);
-
-    char output_name[len + strlen("_errors") + 1];
-    strncpy(output_name, file_name, len - strlen(".csv"));
-    output_name[len - strlen(".csv")] = '\0';
-    strcat(output_name, "_errors.csv");
+    char *output_name = create_error_file_name(file_name);
+    // allocation went wrong
+    if (output_name == NULL)
+        return 3;
 
     FILE *output_file = fopen(output_name, "w");
     if (output_file == NULL) {
+        free(output_name);
         perror("Error");
-        fclose(input_file);
-        return 1;
+        return 2;
     }
 
     char *line = NULL;
+    size_t len = 0;
     ssize_t read = 0;
 
     // first line is the header
@@ -62,14 +74,10 @@ int parse_entity(Catalog *manager, const char *file_name, unsigned num_tokens,
         if (read > 0 && line[read - 1] == '\n')
             line[read - 1] = '\0';
 
-        if (parse_entity_line(manager, line, check_entity, num_tokens, create_entity) != 0)
-            fprintf(output_file, "%s", line);
+        // entity is not valid
+        if (parse_entity_line(manager, type, line, n_tokens) == false)
+            fprintf(output_file, "%s\n", line);
     }
-
-    free(line);
-
-    fclose(input_file);
-    fclose(output_file);
 
     return 0;
 }
