@@ -17,7 +17,7 @@ typedef struct music {
 } Music;
 
 
-void *create_music(const char **tokens, unsigned len) {
+void *create_music(char **tokens, unsigned len) {
     if (tokens == NULL || len != TOTAL_TOKENS)
         return NULL;
 

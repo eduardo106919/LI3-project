@@ -18,7 +18,7 @@ typedef struct artist {
     char *country;
 } Artist;
 
-void *create_artist(const char **tokens, unsigned len) {
+void *create_artist(char **tokens, unsigned len) {
     if (tokens == NULL || len != TOTAL_TOKENS)
         return NULL;
 

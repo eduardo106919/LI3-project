@@ -9,6 +9,8 @@
 #ifndef CATALOG_H
 #define CATALOG_H
 
+#include <stdbool.h>
+
 /**
  * @brief Enum to identify an Entity
  */
@@ -55,6 +57,11 @@ int catalog_add_entity(Catalog *manager, char **tokens, unsigned n_tokens, Entit
  * @return false Entity does not exist
  */
 bool catalog_check_entity(const Catalog *manager, const char *identifier, Entity to_find);
+
+
+
+
+bool catalog_validate_entity(const Catalog *manager, char **tokens, unsigned n_tokens, Entity type);
 
 
 #endif

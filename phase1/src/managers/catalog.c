@@ -45,7 +45,7 @@ void destroy_catalog(Catalog *manager) {
             destroy_artists_manager(manager->artists);
 
         if (manager->songs != NULL)
-            destroy_musics_manager(manager->musics);
+            destroy_musics_manager(manager->songs);
 
         if (manager->users != NULL)
             destroy_users_manager(manager->users);
@@ -55,7 +55,7 @@ void destroy_catalog(Catalog *manager) {
 }
 
 int catalog_add_entity(Catalog *manager, char **tokens, unsigned n_tokens, Entity type) {
-    if (manager == NULL || tokens == NULL || n_tokens == NULL || type == None)
+    if (manager == NULL || tokens == NULL || n_tokens == 0 || type == None)
         return 1;
 
     int result = 0;
@@ -98,4 +98,10 @@ bool catalog_check_entity(const Catalog *manager, const char *identifier, Entity
     }
 
     return result;
+}
+
+bool catalog_validate_entity(const Catalog *manager, char **tokens, unsigned n_tokens, Entity type) {
+
+
+    return false;
 }

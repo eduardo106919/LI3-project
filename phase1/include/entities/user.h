@@ -14,7 +14,7 @@ typedef struct user User;
  * @param len Number of elements on the array
  * @return void* New User
  */
-void *create_user(const char **tokens, unsigned len);
+void *create_user(char **tokens, unsigned len);
 
 /**
  * @brief Frees the allocated space for a User

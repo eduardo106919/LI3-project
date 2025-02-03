@@ -30,7 +30,7 @@ void destroy_musics_manager(Musics_Manager *manager) {
     }
 }
 
-int add_music_MM(Musics_Manager *manager, const char **tokens, unsigned n_tokens) {
+int add_music_MM(Musics_Manager *manager, char **tokens, unsigned n_tokens) {
     if (manager == NULL || tokens == NULL || n_tokens == 0)
         return 1;
 

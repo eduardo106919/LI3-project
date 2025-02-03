@@ -10,7 +10,7 @@ typedef struct music Music;
  * @param len Number of elements on the array
  * @return void* Music (NULL on failure)
  */
-void *create_music(const char **tokens, unsigned len);
+void *create_music(char **tokens, unsigned len);
 
 /**
  * @brief Frees the allocated space for a Music

@@ -22,7 +22,7 @@ typedef struct artist Artist;
  * @param len Number of elements on the array
  * @return void* Artist (NULL on failure)
  */
-void *create_artist(const char **tokens, unsigned len);
+void *create_artist(char **tokens, unsigned len);
 
 /**
  * @brief Frees the space allocated for an Artist

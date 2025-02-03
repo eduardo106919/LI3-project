@@ -16,7 +16,7 @@ typedef struct user {
     unsigned num_liked;
 } User;
 
-void *create_user(const char **tokens, unsigned len) {
+void *create_user(char **tokens, unsigned len) {
     if (tokens == NULL || len != TOTAL_TOKENS)
         return NULL;
 
