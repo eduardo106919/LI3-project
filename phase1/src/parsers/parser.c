@@ -6,16 +6,16 @@
 #include <string.h>
 
 /**
- * @brief 
+ * @brief Parses a csv line of and entity file
  * 
  * Assumes the input is not NULL
  * 
- * @param manager 
- * @param type 
- * @param line 
- * @param n_tokens 
- * @return true 
- * @return false 
+ * @param manager Catalog
+ * @param type Type of entity to parse
+ * @param line Line of the csv file
+ * @param n_tokens Number of tokens on the line
+ * @return true Line is valid
+ * @return false Line is not valid
  */
 static bool parse_entity_line(Catalog *manager, Entity type, const char *line, unsigned n_tokens) {
     char *temp = strdup(line);
@@ -31,10 +31,11 @@ static bool parse_entity_line(Catalog *manager, Entity type, const char *line, u
     }
 
     // validate the entity
-    if (catalog_validate_entity(manager, tokens, n_tokens, type) == true)
-        catalog_add_entity(manager, tokens, n_tokens, type);
-    else
+    if (catalog_validate_entity(manager, tokens, n_tokens, type) == false)
         return false;
+
+    // add the entity to the catalog
+    catalog_add_entity(manager, tokens, n_tokens, type);
 
     return true;
 }

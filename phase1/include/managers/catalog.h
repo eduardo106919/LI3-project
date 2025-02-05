@@ -58,9 +58,16 @@ int catalog_add_entity(Catalog *manager, char **tokens, unsigned n_tokens, Entit
  */
 bool catalog_check_entity(const Catalog *manager, const char *identifier, Entity to_find);
 
-
-
-
+/**
+ * @brief Checks if an entity is valid
+ * 
+ * @param manager Catalog
+ * @param tokens Information to validate
+ * @param n_tokens Number of elements on @b tokens
+ * @param type Type of entity to check
+ * @return true Entity is valid
+ * @return false Entity is not valid
+ */
 bool catalog_validate_entity(const Catalog *manager, char **tokens, unsigned n_tokens, Entity type);
 
 

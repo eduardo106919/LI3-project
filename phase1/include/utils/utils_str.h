@@ -8,6 +8,7 @@
 #define UTILS_STR_H
 
 #include <stddef.h>
+#include <stdbool.h>
 
 /**
  * @brief Removes the first and last character from a string
@@ -28,5 +29,17 @@ void remove_first_last_char(char *str);
  * @note return value is heap allocated
  */
 char **parse_string_list(const char *string, unsigned *len, size_t token_len, const char *delim);
+
+/**
+ * @brief Checks if a csv list is empty
+ * 
+ * A CSV list is empty it has only two characters, "[]"
+ * 
+ * @param list CSV list
+ * @return true List is empty
+ * @return false List is not empty
+ */
+bool csv_list_is_empty(const char *list);
+
 
 #endif

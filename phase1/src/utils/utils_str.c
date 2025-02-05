@@ -19,7 +19,7 @@ char **parse_string_list(const char *string, unsigned *len, size_t token_len, co
         return NULL;
 
     unsigned n_tokens = strlen(string) / token_len;
-    *len =  n_tokens;
+    *len = n_tokens;
     if (n_tokens == 0)
         return NULL;
 
@@ -41,4 +41,8 @@ char **parse_string_list(const char *string, unsigned *len, size_t token_len, co
     }
 
     return tokens;
+}
+
+bool csv_list_is_empty(const char *list) {
+    return list != NULL && strcmp(list, "[]");
 }
